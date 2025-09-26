@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novo Usuário</title>
+</head>
+<body>
+    <h1>Cadastrar Novo Usuário</h1>
+
+    <!-- Flash messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for category, message in messages %}
+                    <div class="flash {{ category }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <form action="{{ url_for('criarusuario') }}" method="post">
+        <label for="nome">Nome</label>
+        <input type="text" name="nome" id="nome" required>
+
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" required>
+
+        <label for="senha">Senha</label>
+        <input type="password" name="senha" id="senha" required>
+
+        <button type="submit">Cadastrar</button>
+        <a href="{{ url_for('cadastro') }}">Cancelar</a>
+    </form>
+</body>
+</html>

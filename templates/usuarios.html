@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Livros</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+<header>
+        <h1><a href="{{url_for('home')}}">biblioteca</a></h1>
+{% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for category, message in messages %}
+                        <div class="flash {{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+    </header>
+    <main>
+        <h2>Lista de Usuarios</h2>
+        <a href="{{url_for('novousuario')}}"> adicionar</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>email</th>
+                    <th>senha</th>
+                    <th>Açoes</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for usuario in usuarios%}
+                <tr>
+                    <td>{{ usuario[0] }}</td>
+                    <td>{{ usuario[1] }}</td>
+                    <td>{{ usuario[2] }}</td>
+                    <td>{{ usuario[3] }}</td>
+                    <td>
+                       <a href="{{url_for('editarusuario',id=usuario[0]) }}">editar</a>
+                    </td>
+                    <td>
+                    <form action="{{ url_for('deletarusuario', id=usuario[0]) }}" method="post" style="display:inline;">
+                            <button type="submit">Deletar</button>
+                    </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>

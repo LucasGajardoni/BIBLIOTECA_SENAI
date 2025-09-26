@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Livro</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1><a href="{{url_for('home')}}">biblioteca</a></h1>
+    </header>
+    <main>
+        <h2>Editar Usuarios</h2>
+
+        <form action="{{ url_for('editarusuario', id=usuario[0]) }}" method="post">
+    <label for="titulo">Nome</label>
+    <input type="text" id="titulo" name="titulo" value="{{ usuario[1] }}" required>
+
+    <label for="autor">Email</label>
+    <input type="email" id="autor" name="autor" value="{{ usuario[2] }}" required>
+
+    <label for="senha">Senha</label>
+    <input type="password" id="senha" name="senha">
+
+    <button type="submit">Salvar Alterações</button>
+    <a href="{{ url_for('index') }}">Cancelar</a>
+    </form>
+    </main>
+</body>
+</html>
